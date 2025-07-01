@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Turn On the Lights</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page2 dark"> <!-- Starts dark -->
+
+  <!-- Interaction Section -->
+  <div id="lampSection" class="lamp-section">
+    <h1 class="lamp-heading">Click anywhere to turn on the lights</h1>
+  </div>
+
+  <!-- Message Section -->
+  <div class="container hidden" id="messageContainer">
+    <h1 class="message-title">✨ The Light is On ✨</h1>
+    <p class="message-text">Let this light brighten the beginning of something beautiful... 💡❤️</p>
+    <a href="page3.html" class="next-button">Next</a>
+  </div>
+
+  <!-- Light Flash Overlay -->
+  <div class="light-flash" id="lightFlash"></div>
+
+  <script>
+    document.body.addEventListener("click", turnOnLamp, { once: true });
+
+    function turnOnLamp() {
+      const lampSection = document.getElementById("lampSection");
+      const messageContainer = document.getElementById("messageContainer");
+      const lightFlash = document.getElementById("lightFlash");
+
+      lightFlash.classList.add("flash-visible");
+
+      // Switch background from dark to animated
+      document.body.classList.remove("dark");
+
+      setTimeout(() => {
+        lampSection.classList.add("hidden");
+        messageContainer.classList.remove("hidden");
+        messageContainer.classList.add("fade-in-slow");
+        lightFlash.classList.remove("flash-visible");
+      }, 1000);
+    }
+  </script>
+
+</body>
+</html>
