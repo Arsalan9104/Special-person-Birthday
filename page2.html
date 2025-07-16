@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="cherry-blossom.png" type="image/png" />
+  <title>Queen's Birthday</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+
+  <style>
+    .cursor-heart {
+      position: absolute;
+      pointer-events: none;
+      color: #ff69b4;
+      font-size: 20px;
+      animation: floatUp 1s ease-out forwards;
+      z-index: 9999;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-30px) scale(1.5);
+      }
+    }
+  </style>
+</head>
+<body class="page2 dark"> 
+
+  <!-- Interaction Section -->
+  <div id="lampSection" class="lamp-section">
+    <h1 class="lamp-heading">Click anywhere to turn on the lights</h1>
+  </div>
+
+  <!-- Message Section -->
+  <div class="container hidden" id="messageContainer">
+    <h1 class="message-title">❤️Happy Birthday Fatima G❤️</h1>
+    <p class="message-text">On this special day, I want to remind you just how incredible you are.🤭
+You are the my most fav person ever.🥳. You are the bestest, sweetest person I’ve ever met in my life.❤🩵 umeed hai abto mai apko tng nh krta hnga😂😂😂 Enjoy your day and make it special as you are🫶🏻 I feel incredibly lucky to know you and friend with you.❤ I hope this year brings you all the happiness you deserve, and may your heart be filled with happiness and day with laughter🩵🩵
+lekin jab bh hmara samna howa mai pta jh kio wordless hjata hn. 😂😂abto mai apko tng bh nh krta takay ap ziada khush reh skain or enjoy kr skain..😂 wo alag baat hai ke mjhe apko tng krna acha lgta ha lkn khair kia krskty hain.😂🩵❤
+Aur mjhe nh pta ke har dfa coincidentally hmra samna kese hojata ha. Ifukuk😂🫶🏻 Lkn mai us wqt bh speechless hi hota hun. 🙉
+In the end Happy Birthday to the most beautiful person i have ever met in my life❤♥🩵.
+🩵Happy Birthday Fatima G🩵</p>
+    <a href="page3.html" class="next-button">Next</a>
+  </div>
+
+  <!-- Light Flash Overlay -->
+  <div class="light-flash" id="lightFlash"></div>
+
+  <!-- Lamp Click Script -->
+  <script>
+    document.body.addEventListener("click", turnOnLamp, { once: true });
+
+    function turnOnLamp() {
+      const lampSection = document.getElementById("lampSection");
+      const messageContainer = document.getElementById("messageContainer");
+      const lightFlash = document.getElementById("lightFlash");
+
+      lightFlash.classList.add("flash-visible");
+      document.body.classList.remove("dark");
+
+      setTimeout(() => {
+        lampSection.classList.add("hidden");
+        messageContainer.classList.remove("hidden");
+        messageContainer.classList.add("fade-in-slow");
+        lightFlash.classList.remove("flash-visible");
+      }, 1000);
+    }
+  </script>
+
+  <!-- Heart Trail Script -->
+<script>
+  let lastHeartTime = 0;
+
+  function createHeart(x, y) {
+    const heart = document.createElement("div");
+    heart.classList.add("cursor-heart");
+    heart.textContent = "🤍";
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 1000);
+  }
+
+  document.addEventListener("mousemove", function (e) {
+    const now = Date.now();
+    if (now - lastHeartTime > 10) {
+      lastHeartTime = now;
+      createHeart(e.pageX, e.pageY);
+    }
+  });
+
+  document.addEventListener("touchmove", function (e) {
+    const now = Date.now();
+    if (now - lastHeartTime > 10) {
+      lastHeartTime = now;
+      const touch = e.touches[0];
+      createHeart(touch.pageX, touch.pageY);
+    }
+  }, { passive: true });
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+/* === General Body Styling === */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Dancing Script', cursive;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* === Page 1 Styling === */
+.page1 {
+  background: linear-gradient(45deg, #000000, #1a1a1a);
+  background-size: 400% 400%;
+  animation: backgroundShift 10s infinite linear;
+  color: #fff;
+  flex-direction: column;
+}
+
+@keyframes backgroundShift {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 100%; }
+}
+
+/* === Page 2 Multicolor Background === */
+.page2 {
+  background:
+    linear-gradient(270deg, rgba(255, 110, 196, 0.7), rgba(120, 115, 245, 0.7), rgba(74, 222, 222, 0.7), rgba(255, 154, 139, 0.7)),
+    url('bg.jpg');
+  background-size: cover, 100% 100%;
+  background-blend-mode: overlay;
+  flex-direction: column;
+  transition: background 2s ease-in-out;
+}
+
+
+.page2.dark {
+  background: #000;
+}
+
+/* === Background Animation === */
+@keyframes animatedGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* === Light Flash Effect === */
+.light-flash {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+  z-index: 100;
+}
+
+.flash-visible {
+  opacity: 1;
+}
+
+/* === Common Content Styling === */
+.container {
+  max-width: 90%;
+  padding: 2rem;
+  z-index: 10;
+}
+
+.title {
+font-family: 'Courgette', cursive;
+    font-size: 4rem;
+  margin-bottom: 2rem;
+}
+
+.lamp-heading {
+font-family: 'Courgette', cursive;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #d46c0b;
+}
+
+.message-title {
+    font-family: 'Dancing Script', cursive;
+
+  font-size: 4rem;
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+
+.message-text {
+font-family: 'Courgette', cursive;
+
+  font-size: 1.5rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1.5rem;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+.confirm-box p{
+font-family: 'Courgette', cursive;
+
+}
+
+/* === Buttons === */
+.next-button,
+.confirm-box button {
+font-family: 'Courgette', cursive;
+   text-decoration: none;
+  padding: 12px 24px;
+  margin: 10px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  background: #ff0000;
+  color: #ffffff;
+  transition: transform 0.3s ease, background 0.3s ease;
+} 
+
+.next-button:hover,
+.confirm-box button:hover {
+  transform: scale(1.1);
+  background: #f06f6f;
+}
+
+/* === Countdown === */
+.countdown {
+  font-size: 8rem;
+  margin-top: 2rem;
+  animation: popIn 0.5s ease-in-out;
+}
+
+/* === Confirm Box === */
+.confirm-box {
+  font-size: 3rem;
+  font-weight: bolder;
+  margin-top: 2rem;
+}
+
+.message {
+  font-size: 3rem;
+  margin-top: 2rem;
+  color: #ffffff;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* === Hidden & Animation Classes === */
+.hidden {
+  display: none;
+}
+
+.fade-in-slow {
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* === Fade to White Effect === */
+#fadeToWhite {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  z-index: 1000;
+}
+
+/* === Responsive === */
+@media (max-width: 600px) {
+  .title, .lamp-heading, .message-title {
+    font-size: 2rem;
+  }
+
+  .message-text {
+    font-size: 1.2rem;
+  }
+
+  .countdown {
+    font-size: 2.5rem;
+  }
+}
+/* === Page 3 Background === */
+.page3 {
+  background: linear-gradient(
+    270deg,
+    #ff0000,   /* Red */
+    #ff7f00,   /* Orange */
+    #ffff00,   /* Yellow */
+    #00ff00,   /* Green */
+    #52f6ff,   /* Blue */
+    #ff49ad,   /* Indigo */
+    #8b00ff    /* Violet */
+  );
+  background-size: 150% 150%;
+  animation: rainbowWave 5s ease infinite;
+  color: #ffffff;
+  flex-direction: column;
+}
+
+@keyframes rainbowWave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+/* === Page 4 Background === */
+/* === Page 4 Background === */
+.page4 {
+  background: url('gift.jpg') no-repeat center center;
+  background-size: cover;              /* This is necessary for full screen */
+  background-attachment: fixed;        /* Optional: parallax effect */
+  background-repeat: no-repeat;
+  background-position: center center;
+  flex-direction: column;
+  transition: background 2s ease-in-out;
+
+  
+}
+
+
+
+
+/* Input Styling */
+.input-field {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem auto;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 15px rgba(255,255,255,0.3);
+}
+/* === Page 5: Thank You Page === */
+.page5 {
+  background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+  color: #333;
+  flex-direction: column;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.glow-pulse-text {
+  color: #ffffff; /* Bright cyan */
+  text-shadow: 0 0 5px #46006e, 0 0 10px #46006e, 0 0 20px #46006e;
+  animation: pulseGlow 1.5s infinite ease-in-out;
+  font-weight: bold;
+}
+
+@keyframes pulseGlow {
+  0% {
+    text-shadow: 0 0 5px #46006e, 0 0 10px #46006e, 0 0 20px #46006e;
+    transform: scale(1);
+  }
+  50% {
+    text-shadow: 0 0 10px #46006e, 0 0 20px #46006e, 0 0 30px #46006e;
+    transform: scale(1.05);
+  }
+  100% {
+    text-shadow: 0 0 5px #46006e, 0 0 10px #46006e, 0 0 20px #46006e;
+    transform: scale(1);
+  }
+}

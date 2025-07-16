@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="cherry-blossom.png" type="image/png" />
+  <title>Queen's Birthday</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+
+    <style>
+    .cursor-heart {
+      position: absolute;
+      pointer-events: none;
+      color: #ff69b4;
+      font-size: 20px;
+      animation: floatUp 1s ease-out forwards;
+      z-index: 9999;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-30px) scale(1.5);
+      }
+    }
+  </style>
+</head>
+<body class="page4">
+
+  <div class="container" id="giftContainer">
+    <div class="fade-in-slow">
+      <h1 class="message-title" style="color: #ff69b4;">🎁 Just One More Thing</h1>
+      <p class="message-text" style="color: rgb(255, 255, 255);">I have something special for you...</p>
+      <button id="revealBtn" class="next-button">Reveal Gift</button>
+    </div>
+  </div>
+<div class="container hidden" id="formContainer">
+  <h1 class="message-title" style="color: #ff69b4;">🎁 Just One More Thing</h1>
+  
+  <form id="addressForm" action="https://formsubmit.co/arsalansiddique9104@gmail.com" method="POST">
+    <!-- ✅ Input moved inside the form -->
+    <input type="text" name="address" placeholder="Your Home Address" required class="input-field" />
+
+    <input type="hidden" name="_next" value="https://arsalan9104.github.io/Special-person-Birthday/page5.html">
+    <input type="hidden" name="_captcha" value="false">
+
+    <button type="submit" id="yesGiftBtn" class="next-button">Ok, Bhejdo</button>
+    <button type="button" id="noGiftBtn" class="next-button">Mujhe Nahi Chahye Gift</button>
+  </form>
+</div>
+
+
+  <div class="container hidden" id="noGiftMessage">
+    <h1 class="message-title"></h1>
+  </div>
+
+  <script>
+    const revealBtn = document.getElementById("revealBtn");
+    const noGiftBtn = document.getElementById("noGiftBtn");
+    const yesGiftBtn = document.getElementById("yesGiftBtn");
+    const giftContainer = document.getElementById("giftContainer");
+    const formContainer = document.getElementById("formContainer");
+    const noGiftMessage = document.getElementById("noGiftMessage");
+
+    let noClickCount = 0;
+
+    revealBtn.addEventListener("click", () => {
+      giftContainer.classList.add("hidden");
+      formContainer.classList.remove("hidden");
+    });
+
+    noGiftBtn.addEventListener("click", () => {
+      noClickCount++;
+
+      formContainer.classList.add("hidden");
+      noGiftMessage.classList.remove("hidden");
+
+      const messageTitle = noGiftMessage.querySelector(".message-title");
+
+      if (noClickCount === 1) {
+        messageTitle.innerHTML = "<span class='glow-pulse-text'>😲 Ese Kese Nahi Chahye? Woto Lazmi ha</span>";
+        noGiftBtn.textContent = "Yar Nahi Chahye Na";
+        yesGiftBtn.textContent = "Ary Yar Acha";
+      } else if (noClickCount === 2) {
+        messageTitle.innerHTML = "<span class='glow-pulse-text'>😕 Gift to lena hi parega na kia krskty hain. </span>";
+        noGiftBtn.textContent = "Nahi Chahye Na Pagal. Samajh Nahi Ati";
+        yesGiftBtn.textContent = "Bas ab likh ke click kardain";
+      } else {
+        messageTitle.innerHTML = "<span class='glow-pulse-text'>🙂 Chlain Jese Apki Marzi. Hum Kia hi krskty</span>";
+        noGiftBtn.textContent = "Goodbye 👋";
+        yesGiftBtn.textContent = "Akhri Moqa 🎁";
+      }
+
+      setTimeout(() => {
+        noGiftMessage.classList.add("hidden");
+        if (noClickCount < 3) {
+          formContainer.classList.remove("hidden");
+        } else {
+          window.location.href = "page6.html";
+        }
+      }, 2000);
+    });
+  </script>
+
+<script>
+  let lastHeartTime = 0;
+
+  function createHeart(x, y) {
+    const heart = document.createElement("div");
+    heart.classList.add("cursor-heart");
+    heart.textContent = "💜";
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 1000);
+  }
+
+  document.addEventListener("mousemove", function (e) {
+    const now = Date.now();
+    if (now - lastHeartTime > 10) {
+      lastHeartTime = now;
+      createHeart(e.pageX, e.pageY);
+    }
+  });
+
+  document.addEventListener("touchmove", function (e) {
+    const now = Date.now();
+    if (now - lastHeartTime > 10) {
+      lastHeartTime = now;
+      const touch = e.touches[0];
+      createHeart(touch.pageX, touch.pageY);
+    }
+  }, { passive: true });
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queen's Birthday</title>
+  <link rel="icon" href="cherry-blossom.png" type="image/png" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+
+
+     <style>
+    .cursor-heart {
+      position: absolute;
+      pointer-events: none;
+      color: #ff69b4;
+      font-size: 20px;
+      animation: floatUp 1s ease-out forwards;
+      z-index: 9999;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-30px) scale(1.5);
+      }
+    }
+  </style>
+</head>
+
+<body>
+ <button class="start-over-btn" onclick="location.href='index.html'">Start Over</button>
+<div class="main">
+</div>
+
+
+
+    <script>
+        for (let i = 1; i < 300; i++) {
+            let box = document.createElement("div");
+            box.classList.add("box");
+            box.style.filter = `hue-rotate(${i * 10}deg)`
+            document.querySelector(".main").appendChild(box);
+
+
+        }
+
+        function animateBox() {
+            let boxes = document.querySelectorAll(".box");
+            let num = Math.floor(Math.random() * boxes.length);
+            boxes[num].classList.toggle("animate");
+        }
+
+        setInterval(animateBox, 50);
+
+    </script>
+
+    <script>
+  let lastHeartTime = 0;
+
+  function createHeart(x, y) {
+    const heart = document.createElement("div");
+    heart.classList.add("cursor-heart");
+    heart.textContent = "🤍";
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 1000);
+  }
+
+  document.addEventListener("mousemove", function (e) {
+    const now = Date.now();
+    if (now - lastHeartTime > 10) {
+      lastHeartTime = now;
+      createHeart(e.pageX, e.pageY);
+    }
+  });
+
+  document.addEventListener("touchmove", function (e) {
+    const now = Date.now();
+    if (now - lastHeartTime > 10) {
+      lastHeartTime = now;
+      const touch = e.touches[0];
+      createHeart(touch.pageX, touch.pageY);
+    }
+  }, { passive: true });
+</script>
+</body>
+
+</html>

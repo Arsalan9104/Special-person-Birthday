@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" href="cherry-blossom.png" type="image/png" />
+  <title>Queen's Birhtday</title>
+  <link rel="stylesheet" href="style.css" />
+ <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+
+  <style>
+    .cursor-heart {
+      position: absolute;
+      pointer-events: none;
+      color: #ff69b4;
+      font-size: 20px;
+      animation: floatUp 1s ease-out forwards;
+      z-index: 9999;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-30px) scale(1.5);
+      }
+    }
+  </style>
+</head>
+<body class="page3">
+
+  <div class="container fade-in-slow">
+    <h1 class="message-title">You Are One of a Kind</h1>
+    <p class="message-text">
+  
+You're truly one of the kindest souls I’ve ever met, ❤
+May your day be as beautiful, bright, and full of joy as you are. 🩵
+    </p>
+    
+    <p class="message-text">
+
+      Are you ready for what’s next?
+    </p>
+
+    <button id="continueBtn" class="next-button">Let’s Continue</button>
+  </div>
+
+  <div id="fadeToWhite"></div>
+
+<script>
+  // Preload Page 4 background image
+  const preloadImg = new Image();
+  preloadImg.src = 'gift.jpg';
+
+  const continueBtn = document.getElementById("continueBtn");
+  continueBtn.addEventListener("click", () => {
+    // Fade to white effect
+    const fadeDiv = document.getElementById("fadeToWhite");
+    fadeDiv.style.opacity = 1;
+
+    // Also fade out the body to avoid flashing
+    document.body.style.transition = "opacity 0.5s ease";
+    document.body.style.opacity = 0;
+
+    setTimeout(() => {
+      window.location.href = "page4.html"; // Redirect after fade
+    }, 500); // Match the fade duration (increased to 500ms for smoothness)
+  });
+</script>
+<script>
+  let lastHeartTime = 0;
+
+  function createHeart(x, y) {
+    const heart = document.createElement("div");
+    heart.classList.add("cursor-heart");
+    heart.textContent = "💖";
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 1000);
+  }
+
+  document.addEventListener("mousemove", function (e) {
+    const now = Date.now();
+    if (now - lastHeartTime > 10) {
+      lastHeartTime = now;
+      createHeart(e.pageX, e.pageY);
+    }
+  });
+
+  document.addEventListener("touchmove", function (e) {
+    const now = Date.now();
+    if (now - lastHeartTime > 10) {
+      lastHeartTime = now;
+      const touch = e.touches[0];
+      createHeart(touch.pageX, touch.pageY);
+    }
+  }, { passive: true });
+</script>
+
+</body>
+</html>

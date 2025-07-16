@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Queen's Birthday</title>
+  <link rel="icon" href="cherry-blossom.png" type="image/png" />
+   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .container {
+      z-index: 2;
+      animation: fadeIn 2s ease-out;
+      padding: 2rem;
+    }
+
+    .message-title {
+          font-family: 'Dancing Script', cursive;
+
+      font-size: 4rem;
+      color: #ffffff;
+      text-shadow: 0 0 15px #ffffff, 0 0 25px #b3e5fc;
+      margin-bottom: 1rem;
+    }
+
+    .message-text {
+      font-size: 1.4rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.5rem;
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      animation: floatIn 3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes floatIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Moon */
+    .moon {
+      position: absolute;
+      top: 80px;
+      right: 100px;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #d3d3d3);
+      border-radius: 50%;
+      box-shadow: 0 0 60px #ffffff80, 0 0 120px #ffffff40;
+      z-index: 1;
+      animation: glow 4s ease-in-out infinite alternate;
+    }
+
+      @keyframes glow {
+      0% { box-shadow: 0 0 40px #ffffff80, 0 0 80px #ffffff40; }
+      100% { box-shadow: 0 0 80px #ffffffaa, 0 0 160px #ffffff60; }
+    }
+
+    /* Stars */
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 4s infinite ease-in-out alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.3; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.5); }
+    }
+
+    /* Clouds */
+    .cloud {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: cloudMove 40s linear infinite;
+    }
+
+    .cloud1 {
+      width: 200px;
+      height: 60px;
+      top: 150px;
+      left: -250px;
+      animation-delay: 0s;
+    }
+
+    .cloud2 {
+      width: 300px;
+      height: 80px;
+      top: 250px;
+      left: -300px;
+      animation-delay: 5s;
+    }
+
+    @keyframes cloudMove {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(150vw); }
+    }
+     .cursor-heart {
+      position: absolute;
+      pointer-events: none;
+      color: #ff69b4;
+      font-size: 20px;
+      animation: floatUp 1s ease-out forwards;
+      z-index: 9999;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-30px) scale(1.5);
+      }
+    }
+
+    .next-button,
+.confirm-box button {
+font-family: 'Courgette', cursive;
+   text-decoration: none;
+  padding: 12px 24px;
+  margin: 10px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  background: #ff0000;
+  color: #ffffff;
+  transition: transform 0.3s ease, background 0.3s ease;
+} 
+
+.next-button:hover,
+.confirm-box button:hover {
+  transform: scale(1.1);
+  background: #f06f6f;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Moon -->
+<div class="moon">
+</div>
+
+  <!-- Stars -->
+  <script>
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.animationDuration = `${1 + Math.random() * 4}s`;
+      star.style.opacity = Math.random();
+      document.body.appendChild(star);
+    }
+  </script>
+<script>
+  let lastHeartTime = 0;
+
+  function createHeart(x, y) {
+    const heart = document.createElement("div");
+    heart.classList.add("cursor-heart");
+    heart.textContent = "🤍";
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 1000);
+  }
+
+  document.addEventListener("mousemove", function (e) {
+    const now = Date.now();
+    if (now - lastHeartTime > 10) {
+      lastHeartTime = now;
+      createHeart(e.pageX, e.pageY);
+    }
+  });
+
+  document.addEventListener("touchmove", function (e) {
+    const now = Date.now();
+    if (now - lastHeartTime > 10) {
+      lastHeartTime = now;
+      const touch = e.touches[0];
+      createHeart(touch.pageX, touch.pageY);
+    }
+  }, { passive: true });
+</script>
+  <!-- Clouds -->
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+
+  <!-- Content -->
+  <div class="container">
+    <h1 class="message-title">💫Thank You!💫</h1>
+    <p class="message-text">
+      Bohot Shukria Address keliye apke liye cake ajaiga inshaAllah. Enjoy your day,<br/>
+       Shukria ke apne mera wish dekha yahan tak or last iske bd aik page or ha bss wo bhi dekhlain and enjoy your day.<br/><br/>
+      Wishing you a good luck, Hamesha khush Rhain,Hasti rhain.
+    </p>
+    <br/>
+<a href="page7.html" class="next-button">In the End</a>  </div>
+
+</body>
+</html>
